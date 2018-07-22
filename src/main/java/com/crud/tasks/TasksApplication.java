@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TasksApplication {
 
 	public static void main(String[] args) {
-		TaskDto taskDto=new TaskDto(
+/*		TaskDto taskDto=new TaskDto(
 				(long)1,
 				"Test title",
 				"I wan to be a coder!"
@@ -17,7 +17,7 @@ public class TasksApplication {
 		String title=taskDto.getTitle();
 		String content=taskDto.getContent();
 
-		System.out.println(id+" "+title+" "+content);
+		System.out.println(id+" "+title+" "+content);*/
 		SpringApplication.run(TasksApplication.class, args);
 	}
 }
