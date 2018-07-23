@@ -11,7 +11,7 @@ public class TasksApplication {
 /*		TaskDto taskDto=new TaskDto(
 				(long)1,
 				"Test title",
-				"I wan to be a coder!"
+				"I want to be a coder!"
 		);
 		Long id=taskDto.getId();
 		String title=taskDto.getTitle();
