@@ -48,14 +48,14 @@ public class TrelloClient {
 
         TrelloBoardDto[] boardsResponse = restTemplate.getForObject(buildUri(), TrelloBoardDto[].class);
 
-       if (boardsResponse != null) {
+/*       if (boardsResponse != null) {
             return Arrays.asList(boardsResponse);
         }
-        return new ArrayList<>();
+        return new ArrayList<>();*/
 
-/*        return Optional.ofNullable(boardsResponse)
-                .orElse(new ArrayList<>());*/
-
+        return Optional.ofNullable(boardsResponse)
+                .map(b -> Arrays.asList(b))
+                .orElse(new ArrayList<>());
     }
 
 }
