@@ -1,6 +1,7 @@
 package com.crud.tasks.trello.client;
 
 import com.crud.tasks.domain.TrelloBoardDto;
+import com.crud.tasks.domain.TrelloCardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -58,5 +59,18 @@ public class TrelloClient {
                 .map(b -> Arrays.asList(b))
                 .orElse(new ArrayList<>());
     }
+
+    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+
+        URI url=UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
+                .queryParam("key", trelloAppKey)
+                .queryParam("token", trelloToken)
+                .queryParam("name", trelloCardDto.getName())
+                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("pos", trelloCardDto.getPos())
+                .queryParam("idList", trelloCardDto.getListId()).build().enode().toUri();
+    }
+
+
 
 }
