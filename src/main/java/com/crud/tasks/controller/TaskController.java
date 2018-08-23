@@ -23,8 +23,6 @@ public class TaskController {
     private DbService service;
     @Autowired
     private TaskMapper taskMapper;
-    @Autowired
-    private TrelloClient trelloClient;
 
     @RequestMapping(method = RequestMethod.GET, value="getTasks")
     public List<TaskDto> getTasks() {

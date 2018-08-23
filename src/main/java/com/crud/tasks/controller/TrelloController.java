@@ -19,6 +19,9 @@ public class TrelloController {
     @Autowired
     private TrelloClient trelloClient;
 
+    @Autowired
+    private TrelloCardDto trelloCardDto;
+
     /*    @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
         public void getTrelloBoards() {
 
