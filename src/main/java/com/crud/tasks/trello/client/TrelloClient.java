@@ -5,6 +5,7 @@ import com.crud.tasks.domain.TrelloCardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
 
 @Component
 public class TrelloClient {
@@ -40,24 +42,23 @@ public class TrelloClient {
     }
 
     public List<TrelloBoardDto> getTrelloBoards() {
-    //    TrelloBoardDto[] boardsResponse=restTemplate.getForObject(
-    //            trelloApiEndpoint+"/members/micunm/boards"+"?key="+trelloAppKey+"&token="+trelloToken,
-    //            TrelloBoardDto[].class);
+        //    TrelloBoardDto[] boardsResponse=restTemplate.getForObject(
+        //            trelloApiEndpoint+"/members/micunm/boards"+"?key="+trelloAppKey+"&token="+trelloToken,
+        //            TrelloBoardDto[].class);
 /*        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/micunm/boards")
                 .queryParam("key", trelloAppKey)
                 .queryParam("token", trelloToken)
                 .queryParam("fields", "name,id").build().encode().toUri();*/
 
-        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(buildUri(), TrelloBoardDto[].class);
-
-/*       if (boardsResponse != null) {
-            return Arrays.asList(boardsResponse);
+        try {
+            TrelloBoardDto[] boardsResponse = restTemplate.getForObject(buildUri(), TrelloBoardDto[].class);
+            return Optional.ofNullable(boardsResponse)
+                    .map(b -> Arrays.asList(b))
+                    .orElse(new ArrayList<>());
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new ArrayList<>();
         }
-        return new ArrayList<>();*/
-
-        return Optional.ofNullable(boardsResponse)
-                .map(b -> Arrays.asList(b))
-                .orElse(new ArrayList<>());
     }
 
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
