@@ -19,5 +19,5 @@ public class TrelloCardDto {
 
     private String listId;
 
-    private TrelloBadges badges;
+//    private TrelloBadges badges;
 }
