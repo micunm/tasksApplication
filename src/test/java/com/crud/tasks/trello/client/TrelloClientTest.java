@@ -96,13 +96,12 @@ public class TrelloClientTest {
 
         URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20task&desc=Test%20Description&pos=top&idList=test_id");
 
-        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
-
         //When
-        List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
+ //       List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
+
         //Then
-        assertEquals(0, fetchedTrelloBoards.size());
-        assertNull(fetchedTrelloBoards.get(0).getName());
-        assertEquals();
+        assertNotNull(trelloClient.getTrelloBoards());
+        assertEquals(0, trelloClient.getTrelloBoards().size());
     }
 }
