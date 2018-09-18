@@ -36,7 +36,7 @@ public class SimpleEmailService {
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage=new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
-        if(mail.getToCC()!=null) {
+        if(mail.getToCC()!=null && mail.getToCC().length()>0) {
             mailMessage.setCc(mail.getToCC());
         }
         mailMessage.setSubject(mail.getSubject());
