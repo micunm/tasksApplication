@@ -31,16 +31,16 @@ public class TrelloMapperTestSuite {
         trelloBoardDto.add(new TrelloBoardDto("1","testBoardDto", trelloListDto));
         //When
         List<TrelloBoard> trelloBoard = trelloMapper.mapToBoards(trelloBoardDto);
-        boolean result = false;
+        boolean testResult = false;
         if(trelloBoard.get(0).getName().equals("testBoardDto") && trelloBoard.get(0).getId().equals("1") &&
-                trelloBoard.get(0).getLists().equals(trelloMapper.mapToList(trelloBoardDto.getLists()))) {
-            result = true;
+                trelloBoard.get(0).getLists().get(0).getName().equals("testListDto")) {
+            testResult = true;
         }
         //Then
-        assertTrue(result);
- //       TestCase.assertEquals(result,true);
+        TestCase.assertEquals(testResult,true);
         assertEquals(1, trelloBoard.size());
     }
+
     @Test
     public void testMapToBoardsDto() {
         //Given
@@ -50,15 +50,16 @@ public class TrelloMapperTestSuite {
         trelloBoard.add(new TrelloBoard("1","testBoard", trelloList));
         //When
         List<TrelloBoardDto> trelloBoardDto = trelloMapper.mapToBoardsDto(trelloBoard);
-        boolean result = false;
+        boolean testResult = false;
         if(trelloBoardDto.get(0).getName().equals("testBoard") && trelloBoardDto.get(0).getId().equals("1") &&
-                trelloBoardDto.get(0).getLists().equals(trelloMapper.mapToListDto(trelloList))) {
-            result = true;
+                trelloBoardDto.get(0).getLists().get(0).getName().equals("testList")) {
+            testResult = true;
         }
         //Then
-        assertTrue(result);
+        assertTrue(testResult);
         assertEquals(1, trelloBoardDto.size());
     }
+
     @Test
     public void testMapToList() {
         //Given
@@ -66,15 +67,16 @@ public class TrelloMapperTestSuite {
         trelloListDto.add(new TrelloListDto("1", "testListDto", false));
         //When
         List<TrelloList> trelloLists = trelloMapper.mapToList(trelloListDto);
-        boolean result = false;
+        boolean testResult = false;
         if(trelloLists.get(0).getId().equals("1") && trelloLists.get(0).getName().equals("testListDto") &&
                 !trelloLists.get(0).isClosed()) {
-            result = true;
+            testResult = true;
         }
         //Then
         assertEquals(1, trelloLists.size());
-        assertTrue(result);
+        assertTrue(testResult);
     }
+
     @Test
     public void testMapToListDto() {
         //Given
@@ -82,41 +84,43 @@ public class TrelloMapperTestSuite {
         trelloList.add(new TrelloList("1", "testList", false));
         //When
         List<TrelloListDto> trelloListDto = trelloMapper.mapToListDto(trelloList);
-        boolean result = false;
+        boolean testResult = false;
         if(trelloList.get(0).getId().equals("1") && trelloList.get(0).getName().equals("testList") &&
                 !trelloList.get(0).isClosed()) {
-            result = true;
+            testResult = true;
         }
         //Then
         assertEquals(1, trelloList.size());
-        assertTrue(result);
+        assertTrue(testResult);
     }
+
     @Test
     public void testMapToCardDto() {
         //Given
         TrelloCard trelloCard = new TrelloCard("testCard", "testDescription", "top", "1");
         //When
         TrelloCardDto trelloCardDto = trelloMapper.mapToCardDto(trelloCard);
-        boolean result = false;
+        boolean testResult = false;
         if(trelloCardDto.getName().equals("testCard") && trelloCardDto.getDescription().equals("testDescription") &&
                 trelloCardDto.getPos().equals("top") && trelloCardDto.getListId().equals("1")) {
-            result = true;
+            testResult = true;
         }
         //Then
-        assertTrue(result);
+        assertTrue(testResult);
     }
+
     @Test
     public void testMapToCard() {
         //Given
         TrelloCardDto trelloCardDto = new TrelloCardDto("testCardDto", "testDescription", "top", "1");
         //When
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
-        boolean result = false;
+        boolean testResult = false;
         if(trelloCard.getName().equals("testCardDto") && trelloCard.getDescription().equals("testDescription") &&
                 trelloCard.getPos().equals("top") && trelloCard.getListId().equals("1")) {
-            result = true;
+            testResult = true;
         }
         //Then
-        assertTrue(result);
+        assertTrue(testResult);
     }
 }
