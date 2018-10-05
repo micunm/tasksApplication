@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -30,24 +31,35 @@ public class DbServiceTestSuite {
         tasksList=dbService.getAllTasks();
 
         //Then
-        assertEquals(3,tasksList.size());
-      //  assertEquals(tasksList.get(0).getTitle().equals(""));
-
+        assertTrue(!tasksList.isEmpty());
     }
 
-/*    @Test
+    @Test
+    public void testGetTask() {
+        //Given
+        Task testTask = new Task(15L,"testTask", "testContent");
+        //When
+        dbService.saveTask(testTask);
+        //Then
+        assertTrue(dbService.getTask(testTask.getId()).isPresent());
+        //CleanUp
+        dbService.deleteTask(testTask.getId());
+    }
+
+    @Test
     public void testSaveTask() {
         //Given
         Task testTask = new Task(9L,"testTask", "testContent");
         //When
-        int tasksCount=dbService.getAllTasks().size();
         dbService.saveTask(testTask);
-        int tasksCount2=dbService.getAllTasks().size();
 
         //Then
-        assertTrue(tasksCount > tasksCount2);
+        assertTrue(dbService.getTask(testTask.getId()).isPresent());
 
-    }*/
+        //CleanUp
+        dbService.deleteTask(testTask.getId());
+
+    }
 
 
 }
