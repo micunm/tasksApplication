@@ -48,4 +48,21 @@ public class MailCreatorService {
 
         return templateEngine.process("mail/created-trello-card-mail", context);
     }
+
+    public String dailyTaskStatusEmail(String message) {
+        Context context = new Context();
+        context.setVariable("message", message);
+        context.setVariable("tasks_url", "https://micunm.github.io/");
+        context.setVariable("button", "Visit website");
+        context.setVariable("godbye_msg","Best Regards,");
+        context.setVariable("admin_config", adminConfig);
+        context.setVariable("company_name", companyConfig.getCompanyName() );
+        context.setVariable("company_email", companyConfig.getCompanyEmail());
+        context.setVariable("company_phone", companyConfig.getCompanyPhone());
+        context.setVariable("company_goal", companyConfig.getCompanyGoal());
+        context.setVariable("show_button", true);
+        context.setVariable("is_friend", true);
+//        context.setVariable("application_functionality", functionality);
+        return templateEngine.process("mail/daily-task-status-mail", context);
+    }
 }
