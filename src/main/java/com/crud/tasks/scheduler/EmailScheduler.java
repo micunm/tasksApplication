@@ -23,8 +23,8 @@ public class EmailScheduler {
     private static final String SUBJECT="Tasks: Once a day email";
     private String taskString="task";
 
-    @Scheduled(cron="0 0/1 21-23 * * *")
-    //@Scheduled(fixedDelay = 10000)
+ //   @Scheduled(cron="0 0/10 21-23 * * *")
+    @Scheduled(fixedDelay = 10000)
     public void sendInformationEmail() {
         long size=taskRepository.count();
 
@@ -35,7 +35,7 @@ public class EmailScheduler {
         }*/
 
         taskString=(size == 1) ? "task" : "tasks";
-        simpleEmailService.send(new Mail(
+        simpleEmailService.sendDaily(new Mail(
                 adminConfig.getAdminMail(),
                 null,
                 SUBJECT,
