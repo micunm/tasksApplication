@@ -24,11 +24,6 @@ public class MailCreatorService {
     @Qualifier("templateEngine")
     private TemplateEngine templateEngine;
 
-/*    @Autowired
-    private AdminConfig adminConfig;
-    @Autowired
-    private CompanyConfig companyConfig;*/
-
     public String buildTrelloCardEmail(String message) {
 
         List<String> functionality=new ArrayList<>();
@@ -47,8 +42,9 @@ public class MailCreatorService {
         context.setVariable("company_email", companyConfig.getCompanyEmail());
         context.setVariable("company_phone", companyConfig.getCompanyPhone());
         context.setVariable("company_goal", companyConfig.getCompanyGoal());
-        context.setVariable("show_button", false);
+        context.setVariable("show_button", true);
         context.setVariable("is_friend", true);
+        context.setVariable("application_functionality", functionality);
 
         return templateEngine.process("mail/created-trello-card-mail", context);
     }
